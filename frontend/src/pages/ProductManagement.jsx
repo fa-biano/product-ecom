@@ -1,19 +1,21 @@
-import { useState }  from 'react';
+import { useState, useContext }  from 'react';
 import Papa from 'papaparse';
+import Context from '../context/Context';
+import UpdateProductTable from '../components/UpdateProductTable';
 
 function ProductManagement() {
   const [localFile, setLocalFile] = useState('');
-  const [parsedFile, setParsedFile] = useState('');
+  const { parsedFile, setParsedFile } = useContext(Context);
 
   const handleChangeFile = ({ target }) => {
-    setLocalFile(target.files[0])
+    setLocalFile(target.files[0]);
   }
 
   const readProductFile = () => {
     Papa.parse(
       localFile,
       { header: true, skipEmptyLines: true, complete: (results) => setParsedFile(results.data) },
-    )
+    );
   }
 
   return (
@@ -27,6 +29,13 @@ function ProductManagement() {
           <button onClick={ readProductFile }>Validar</button>
         </div>
         <button disabled>Atualizar</button>
+        {
+          parsedFile.length > 0
+            ? <UpdateProductTable/> :
+            <div>
+              <p>Nenhum arquivo carregado...</p>
+            </div>
+        }
       </main>
     </div>
   );
