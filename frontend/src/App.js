@@ -1,18 +1,14 @@
+import React from 'react';
+import { Route, Routes } from 'react-router-dom';
+import productManagement from './pages/productManagement';
 import './styles/App.css';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <h2>Gestão de Preço de Produtos</h2>
-      </header>
-      <main>
-        <div>
-          <input type='file'></input>
-          <button>Validar</button>
-        </div>
-        <button disabled>Atualizar</button>
-      </main>
+    <div>
+      <Routes>
+        <Route Component={ productManagement } path='/'/>
+      </Routes>
     </div>
   );
 }
