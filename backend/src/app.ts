@@ -1,5 +1,5 @@
 import express from 'express';
-import productRouter from './api/routes/ProductRouter';
+import { productRouter, packRouter } from './api/routes';
 
 export default class App {
   public app: express.Express;
@@ -12,6 +12,7 @@ export default class App {
 
   private routes(): void {
     this.app.use('/products', productRouter);
+    this.app.use('/packs', packRouter);
   }
 
   private config():void {

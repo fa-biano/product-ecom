@@ -1,4 +1,4 @@
-import { Model, INTEGER } from 'sequelize';
+import { Model, BIGINT } from 'sequelize';
 import db from '.';
 import Product from './ProductModel';
 
@@ -12,21 +12,21 @@ class Pack extends Model {
 Pack.init(
   {
     id: {
-      type: INTEGER,
+      type: BIGINT,
       allowNull: false,
       autoIncrement: true,
       primaryKey: true,
     },
     packId: {
-      type: INTEGER,
+      type: BIGINT,
       allowNull: false,
     },
     productId: {
-      type: INTEGER,
+      type: BIGINT,
       allowNull: false,
     },
     qty: {
-      type: INTEGER,
+      type: BIGINT,
       allowNull: false,
     },
   },
@@ -38,7 +38,7 @@ Pack.init(
   },
 );
 
-Pack.belongsTo(Product, { foreignKey: 'packId', as: 'packCode' });
-Pack.belongsTo(Product, { foreignKey: 'productId', as: 'productCode' });
+Pack.belongsTo(Product, { foreignKey: 'packId', as: 'packDescription' });
+Pack.belongsTo(Product, { foreignKey: 'productId', as: 'product' });
 
 export default Pack;

@@ -1,5 +1,6 @@
-import { Model, INTEGER, STRING, DECIMAL } from 'sequelize';
+import { Model, STRING, FLOAT } from 'sequelize';
 import db from '.';
+import { BIGINT } from 'sequelize';
 
 class Product extends Model {
   declare code: number;
@@ -11,7 +12,7 @@ class Product extends Model {
 Product.init(
   {
     code: {
-      type: INTEGER,
+      type: BIGINT,
       allowNull: false,
       primaryKey: true,
     },
@@ -20,11 +21,11 @@ Product.init(
       allowNull: false,
     },
     costPrice: {
-      type: DECIMAL(9, 2),
+      type: FLOAT(9, 2),
       allowNull: false,
     },
     salesPrice: {
-      type: DECIMAL(9, 2),
+      type: FLOAT(9, 2),
       allowNull: false,
     },
   },
