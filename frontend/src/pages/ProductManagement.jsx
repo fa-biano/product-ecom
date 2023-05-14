@@ -2,10 +2,13 @@ import { useState, useContext, useEffect } from 'react';
 import Papa from 'papaparse';
 import Context from '../context/Context';
 import UpdateProductTable from '../components/UpdateProductTable';
+import updateProductValidations from '../utils/updateProductValidations';
 
 function ProductManagement() {
   const [localFile, setLocalFile] = useState('');
-  const { parsedFile, setParsedFile } = useContext(Context);
+  const [productsFromDB, setProductsFromDB] = useState([]);
+  const [parsedFile, setParsedFile] = useState([]);
+  const { validatedFile, setValidatedFile } = useContext(Context);
 
   const handleChangeFile = ({ target }) => {
     setLocalFile(target.files[0]);
@@ -17,7 +20,12 @@ function ProductManagement() {
       {
         header: true,
         skipEmptyLines: true,
-        complete: (results) => setParsedFile(results.data),
+        complete: (results) => {
+          setParsedFile(results.data);
+          const validations = updateProductValidations(productsFromDB, results.data);
+          setValidatedFile(validations);
+          console.log('validatedFile', validatedFile);
+        },
       },
     );
   };
@@ -34,10 +42,12 @@ function ProductManagement() {
           'Content-Type': 'application/json',
         },
       });
-      console.log(response);
+
+      const data = await response.json();
+      setProductsFromDB(data);
     };
     fetchProductsApi();
-  }, []);
+  }, [productsFromDB]);
 
   return (
     <div className="App">

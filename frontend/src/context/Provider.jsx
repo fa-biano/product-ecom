@@ -3,12 +3,12 @@ import { useState, useMemo } from 'react';
 import Context from './Context';
 
 function Provider({ children }) {
-  const [parsedFile, setParsedFile] = useState('');
+  const [validatedFile, setValidatedFile] = useState([]);
 
   const context = useMemo(() => ({
-    parsedFile,
-    setParsedFile,
-  }), [parsedFile]);
+    validatedFile,
+    setValidatedFile,
+  }), [validatedFile, setValidatedFile]);
 
   return (
     <Context.Provider value={ context }>
