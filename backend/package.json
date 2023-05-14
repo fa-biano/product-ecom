@@ -2,8 +2,12 @@
   "name": "backend",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "./build/server",
   "scripts": {
+    "build": "/bin/sh tsc_eval.sh",
+    "prestart": "npm run build",
+    "start": "node .",
+    "predev": "npm run build",
     "dev": "nodemon --watch \"./src/**\" ./src/server.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
