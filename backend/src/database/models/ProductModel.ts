@@ -20,11 +20,11 @@ Product.init(
       allowNull: false,
     },
     costPrice: {
-      type: DECIMAL(9,2),
+      type: DECIMAL(9, 2),
       allowNull: false,
     },
     salesPrice: {
-      type: DECIMAL(9,2),
+      type: DECIMAL(9, 2),
       allowNull: false,
     },
   },

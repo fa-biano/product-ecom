@@ -38,7 +38,7 @@ Pack.init(
   },
 );
 
-Pack.belongsTo(Product, { foreignKey: 'packId', as: 'packCode' })
-Pack.belongsTo(Product, { foreignKey: 'productId', as: 'productCode' })
+Pack.belongsTo(Product, { foreignKey: 'packId', as: 'packCode' });
+Pack.belongsTo(Product, { foreignKey: 'productId', as: 'productCode' });
 
 export default Pack;

@@ -2,7 +2,7 @@ import express from 'express';
 import productRouter from './api/routes/ProductRouter';
 
 export default class App {
-  public app: express.Express
+  public app: express.Express;
 
   constructor() {
     this.app = express();
