@@ -7,7 +7,7 @@ function App() {
   return (
     <div>
       <Routes>
-        <Route Component={ ProductManagement } path='/'/>
+        <Route Component={ ProductManagement } path="/" />
       </Routes>
     </div>
   );

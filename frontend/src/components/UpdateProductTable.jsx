@@ -20,7 +20,7 @@ function UpdateProductTable() {
         </tr>
       </tbody>
     </table>
-  )
+  );
 }
 
-export default UpdateProductTable
+export default UpdateProductTable;

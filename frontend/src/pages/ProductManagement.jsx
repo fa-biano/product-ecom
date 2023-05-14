@@ -1,4 +1,4 @@
-import { useState, useContext }  from 'react';
+import { useState, useContext, useEffect } from 'react';
 import Papa from 'papaparse';
 import Context from '../context/Context';
 import UpdateProductTable from '../components/UpdateProductTable';
@@ -9,14 +9,35 @@ function ProductManagement() {
 
   const handleChangeFile = ({ target }) => {
     setLocalFile(target.files[0]);
-  }
+  };
 
   const readProductFile = () => {
     Papa.parse(
       localFile,
-      { header: true, skipEmptyLines: true, complete: (results) => setParsedFile(results.data) },
+      {
+        header: true,
+        skipEmptyLines: true,
+        complete: (results) => setParsedFile(results.data),
+      },
     );
-  }
+  };
+
+  useEffect(() => {
+    const fetchProductsApi = async () => {
+      const HOST = process.env.REACT_APP_API_HOST || 'localhost:3001';
+      const PROTOCOL = process.env.REACT_APP_API_PROTOCOL || 'http';
+      const endpoint = `${PROTOCOL}://${HOST}/products`;
+
+      const response = await fetch(endpoint, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      console.log(response);
+    };
+    fetchProductsApi();
+  }, []);
 
   return (
     <div className="App">
@@ -25,16 +46,14 @@ function ProductManagement() {
       </header>
       <main>
         <div>
-          <input type='file' accept='.csv' onChange={ handleChangeFile }></input>
-          <button onClick={ readProductFile }>Validar</button>
+          <input type="file" accept=".csv" onChange={ handleChangeFile } />
+          <button type="button" onClick={ readProductFile }>Validar</button>
         </div>
-        <button disabled>Atualizar</button>
+        <button type="submit" disabled>Atualizar</button>
         {
           parsedFile.length > 0
-            ? <UpdateProductTable/> :
-            <div>
-              <p>Nenhum arquivo carregado...</p>
-            </div>
+            ? <UpdateProductTable />
+            : <p>Nenhum arquivo carregado...</p>
         }
       </main>
     </div>
