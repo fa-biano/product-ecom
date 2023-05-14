@@ -1,6 +1,5 @@
-import { Model, STRING, FLOAT } from 'sequelize';
+import { Model, STRING, FLOAT, BIGINT } from 'sequelize';
 import db from '.';
-import { BIGINT } from 'sequelize';
 
 class Product extends Model {
   declare code: number;
