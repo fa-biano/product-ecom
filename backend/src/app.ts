@@ -1,4 +1,5 @@
 import express from 'express';
+import productRouter from './api/routes/ProductRouter';
 
 export default class App {
   public app: express.Express
@@ -6,12 +7,12 @@ export default class App {
   constructor() {
     this.app = express();
     this.config();
-    // this.routes();
+    this.routes();
   }
 
-  // private routes(): void {
-  //   this.app.use('/products', );
-  // }
+  private routes(): void {
+    this.app.use('/products', productRouter);
+  }
 
   private config():void {
     const accessControl: express.RequestHandler = (_req, res, next) => {
