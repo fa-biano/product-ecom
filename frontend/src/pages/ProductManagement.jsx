@@ -6,6 +6,7 @@ import updateProductValidations from '../utils/updateProductValidations';
 
 function ProductManagement() {
   const [localFile, setLocalFile] = useState('');
+  const [parsedFile, setParsedFile] = useState([]);
   const [productsFromDB, setProductsFromDB] = useState([]);
   const { validatedFile, setValidatedFile } = useContext(Context);
 
@@ -17,18 +18,9 @@ function ProductManagement() {
     setLocalFile(target.files[0]);
   };
 
-  const readAndValidateProductFile = () => {
-    Papa.parse(
-      localFile,
-      {
-        header: true,
-        skipEmptyLines: true,
-        complete: (results) => {
-          const validations = updateProductValidations(productsFromDB, results.data);
-          setValidatedFile(validations);
-        },
-      },
-    );
+  const ValidateProductFile = () => {
+    const validations = updateProductValidations(productsFromDB, parsedFile);
+    setValidatedFile(validations);
   };
 
   const isButtonDisabled = Array.isArray(validatedFile) && validatedFile
@@ -47,7 +39,6 @@ function ProductManagement() {
       });
 
       const result = await response.json();
-      console.log('result', result);
       if (result.message === 'Updated') {
         window.location.reload();
       }
@@ -73,7 +64,20 @@ function ProductManagement() {
       }
     };
     fetchProductsApi();
-  }, []);
+  }, [endpoint]);
+
+  useEffect(() => {
+    if (localFile) {
+      Papa.parse(
+        localFile,
+        {
+          header: true,
+          skipEmptyLines: true,
+          complete: (results) => setParsedFile(results.data),
+        },
+      );
+    }
+  }, [localFile]);
 
   return (
     <div className="App">
@@ -85,11 +89,25 @@ function ProductManagement() {
           <input
             type="file"
             accept=".csv"
+            data-testid="fileInput"
             onChange={ handleChangeFile }
           />
-          <button type="button" onClick={ readAndValidateProductFile }>Validar</button>
+
+          <button
+            type="button"
+            data-testid="validateBtn"
+            onClick={ ValidateProductFile }
+          >
+            Validar
+          </button>
+
         </div>
-        <button type="submit" disabled={ !isButtonDisabled } onClick={ handleSubmit }>
+        <button
+          type="button"
+          data-testid="submitBtn"
+          disabled={ !isButtonDisabled }
+          onClick={ handleSubmit }
+        >
           Atualizar
         </button>
         {
