@@ -27,19 +27,9 @@ Ao clicar no botão atualizar, os novos preços dos produtos são enviados para 
   
   Renomeie os arquivos `.env.example` para `.env` nos diretórios `frontend` e `/backend`
 
-  Crie um Docker container rodando o MySQL na versão 5.7 com `docker container run --name container-mysql -e MYSQL_ROOT_PASSWORD=password -d -p 3306:3306 mysql:5.7` *(Necessário ter o Docker instalado localmente)*
+  Execute o comando no terminal `docker compose up -d` para subir os 3 containers da aplicaçào: app_frontend, app_backend e ap_db *(Necessário ter o Docker e o docker-compose instalados localmente)*
 
-  Acesse o diretório `/backend` e execute os comandos abaixo para instalar as dependências, iniciar o servidor backend e configurar o banco de dados:
-    <ol>
-      <li>`npm intall`</li>
-      <li>`npm start`</li>
-    </ol>
-
-  Acesse o diretório `/frontend` e execute os comandos abaixo para instalar as dependências e iniciar o frontend:
-    <ol>
-      <li>`npm intall`</li>
-      <li>`npm start`</li>
-    </ol>
+  Após finalizar o processo de build do docker compose, todas as dependências estarão instaladas, banco de dados configurado e os serviços de frontend e backend estarão em execução
   
   Acesse a aplicação pelo navegador em `http://localhost:3000`
 
@@ -49,7 +39,7 @@ Ao clicar no botão atualizar, os novos preços dos produtos são enviados para 
   * REACT_APP_API_HOST=localhost:3001
 
   Backend:
-  * PORT=3001
+  * API_PORT=3001
   * MYSQL_HOST=localhost
   * MYSQL_USER=root
   * MYSQL_ROOT_PASSWORD=password
