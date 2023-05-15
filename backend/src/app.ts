@@ -31,3 +31,5 @@ export default class App {
     this.app.listen(PORT, () => console.log(`Running on port ${PORT}`));
   }
 }
+
+export const { app } = new App();
