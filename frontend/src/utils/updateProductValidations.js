@@ -1,7 +1,6 @@
 const validateFields = (updateProducts) => {
   const isValidFields = updateProducts
     .every((prod) => prod.product_code && prod.new_price);
-  console.log('isValidFields', isValidFields);
   return isValidFields;
 };
 
@@ -10,7 +9,6 @@ const validatePriceFormat = (updateProducts) => {
     const { __parsed_extra: parsedExtra } = prod;
     return parseFloat(prod.new_price) && !parsedExtra;
   });
-  console.log('isValidPrice', isValidPrice);
   return isValidPrice;
 };
 
@@ -34,8 +32,6 @@ const validateProductCode = (productsFromDB, updateProducts) => {
     updateProd.validation = 'Ok';
     return updateProd;
   });
-  console.log('codesFromDB', codesFromDB);
-  console.log('updateCodes', checkCodes);
   return checkCodes;
 };
 
@@ -58,8 +54,6 @@ const validatePrice = (productsFromDB, updateProducts) => {
     const isGreaterThanCost = parseFloat(prod.new_price) > currentPrice.costPrice;
     const isValidPriceRatio = priceRatio <= maxRatio && priceRatio >= minRatio;
 
-    console.log('isGreaterThanCost', isGreaterThanCost);
-
     if (!isGreaterThanCost) {
       updateProd.validation = 'Novo preço não pode ser menor que o Custo do Produto';
       return updateProd;
@@ -73,7 +67,6 @@ const validatePrice = (productsFromDB, updateProducts) => {
     updateProd.validation = 'Novo preço não pode ser maior/menor que 10%';
     return updateProd;
   });
-  console.log('checkPrice', checkPrice);
   return checkPrice;
 };
 

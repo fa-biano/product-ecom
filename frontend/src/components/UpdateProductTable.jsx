@@ -5,7 +5,7 @@ function UpdateProductTable() {
   const { validatedFile } = useContext(Context);
 
   return (
-    <table>
+    <table data-testid="resultTable">
       <thead>
         <tr>
           <th>Código</th>

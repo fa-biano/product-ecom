@@ -19,8 +19,10 @@ function ProductManagement() {
   };
 
   const ValidateProductFile = () => {
-    const validations = updateProductValidations(productsFromDB, parsedFile);
-    setValidatedFile(validations);
+    if (parsedFile.length > 0) {
+      const validations = updateProductValidations(productsFromDB, parsedFile);
+      setValidatedFile(validations);
+    }
   };
 
   const isButtonDisabled = Array.isArray(validatedFile) && validatedFile
