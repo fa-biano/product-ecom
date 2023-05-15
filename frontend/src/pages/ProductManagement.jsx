@@ -87,7 +87,7 @@ function ProductManagement() {
         <h2>Gestão de Preço de Produtos</h2>
       </header>
       <main>
-        <div>
+        <div className="file-content">
           <input
             type="file"
             accept=".csv"
@@ -112,11 +112,13 @@ function ProductManagement() {
         >
           Atualizar
         </button>
-        {
-          typeof validatedFile === 'string'
-            ? <p>{validatedFile}</p>
-            : <UpdateProductTable />
-        }
+        <div className="result-table">
+          {
+            typeof validatedFile === 'string'
+              ? <p>{validatedFile}</p>
+              : <UpdateProductTable />
+          }
+        </div>
       </main>
     </div>
   );
