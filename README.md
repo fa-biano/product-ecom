@@ -35,7 +35,7 @@ Ao clicar no botão atualizar, os novos preços dos produtos são enviados para 
       <li>`npm start`</li>
     </ol>
 
-  Acesse o diretório `/frontend` e execute os comandos abaixo para instalar as dependências e iniciar frontend:
+  Acesse o diretório `/frontend` e execute os comandos abaixo para instalar as dependências e iniciar o frontend:
     <ol>
       <li>`npm intall`</li>
       <li>`npm start`</li>
