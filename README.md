@@ -16,12 +16,12 @@ Ao clicar no botão atualizar, os novos preços dos produtos são enviados para 
 ## Validações e Regras de Negócio:
 
   Validação dos campos do arquivo:
-    * Deve ter cabeçalho com 2 colunas nomeadas como `product_code` e `new_price`
-    * Valores do campo `new_price` devem ser números com casas decimais (centavos) separadas por ponto
+  * Deve ter cabeçalho com 2 colunas nomeadas como `product_code` e `new_price`
+  * Valores do campo `new_price` devem ser números com casas decimais (centavos) separadas por ponto
 
   Regras de negócio:
-    * O código do produto na coluna `product_code` deve ser um produto válido/existente
-    * Novos preços de venda do campo `new_price` não podem ter variação nem maior e nem menor do que 10%
+  * O código do produto na coluna `product_code` deve ser um produto válido/existente
+  * Novos preços de venda do campo `new_price` não podem ter variação nem maior e nem menor do que 10%
 
 ## 🔥 Tecnologias utilizadas:
 
