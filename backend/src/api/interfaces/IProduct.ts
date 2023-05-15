@@ -6,4 +6,3 @@ export default interface IProduct extends IProductUpdate {
   name: string;
   costPrice: number;
 }
-

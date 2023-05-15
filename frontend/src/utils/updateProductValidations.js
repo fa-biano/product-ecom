@@ -20,10 +20,10 @@ const validateProductCode = (productsFromDB, updateProducts) => {
     const checkCode = parseInt(prod.product_code, 10);
 
     const updateProd = {
-      code: prod.product_code,
+      code: checkCode,
       name: '',
       currentPrice: '',
-      newPrice: prod.new_price,
+      newPrice: parseFloat(prod.new_price),
     };
 
     if (!codesFromDB.includes(checkCode)) {
@@ -47,10 +47,10 @@ const validatePrice = (productsFromDB, updateProducts) => {
     const priceRatio = parseFloat(prod.new_price) / currentPrice.salesPrice;
 
     const updateProd = {
-      code: prod.product_code,
+      code: parseInt(prod.product_code, 10),
       name: currentPrice.name,
       currentPrice: currentPrice.salesPrice,
-      newPrice: prod.new_price,
+      newPrice: parseFloat(prod.new_price),
     };
 
     const maxRatio = 1.1;
