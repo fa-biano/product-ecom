@@ -15,15 +15,24 @@ const validatePriceFormat = (updateProducts) => {
 };
 
 const validateProductCode = (productsFromDB, updateProducts) => {
-  const codesFromDB = productsFromDB.map((prods) => prods.code);
-  const checkCodes = updateProducts.map((prods) => {
-    const checkCode = parseInt(prods.product_code, 10);
+  const codesFromDB = productsFromDB.map((prod) => prod.code);
+  const checkCodes = updateProducts.map((prod) => {
+    const checkCode = parseInt(prod.product_code, 10);
+
+    const updateProd = {
+      code: prod.product_code,
+      name: '',
+      currentPrice: '',
+      newPrice: prod.new_price,
+    };
+
     if (!codesFromDB.includes(checkCode)) {
-      prods.validation = 'Codigo de Produto Inválido';
-      return prods;
+      updateProd.validation = 'Codigo de Produto Inválido';
+      return updateProd;
     }
-    prods.validation = 'Ok';
-    return prods;
+
+    updateProd.validation = 'Ok';
+    return updateProd;
   });
   console.log('codesFromDB', codesFromDB);
   console.log('updateCodes', checkCodes);
@@ -36,20 +45,24 @@ const validatePrice = (productsFromDB, updateProducts) => {
       .find((current) => current.code === parseInt(prod.product_code, 10));
 
     const priceRatio = parseFloat(prod.new_price) / currentPrice.salesPrice;
-    console.log(
-      `${parseFloat(prod.new_price)} / ${currentPrice.salesPrice} = ${priceRatio}`,
-    );
+
+    const updateProd = {
+      code: prod.product_code,
+      name: currentPrice.name,
+      currentPrice: currentPrice.salesPrice,
+      newPrice: prod.new_price,
+    };
 
     const maxRatio = 1.1;
     const minRatio = 0.9;
     if (priceRatio <= maxRatio && priceRatio >= minRatio) {
-      prod.validation = 'Ok';
-      return prod;
+      updateProd.validation = 'Ok';
+      return updateProd;
     }
-    prod.validation = 'Novo preço não pode ter alteração maior/menor que 10%';
-    return prod;
+    updateProd.validation = 'Novo preço não pode ser maior/menor que 10%';
+    return updateProd;
   });
-  console.log('check', checkPrice);
+  console.log('checkPrice', checkPrice);
   return checkPrice;
 };
 

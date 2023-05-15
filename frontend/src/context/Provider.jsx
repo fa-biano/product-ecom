@@ -3,7 +3,7 @@ import { useState, useMemo } from 'react';
 import Context from './Context';
 
 function Provider({ children }) {
-  const [validatedFile, setValidatedFile] = useState([]);
+  const [validatedFile, setValidatedFile] = useState('Nenhum arquivo carregado...');
 
   const context = useMemo(() => ({
     validatedFile,

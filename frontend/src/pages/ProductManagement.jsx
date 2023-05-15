@@ -7,28 +7,28 @@ import updateProductValidations from '../utils/updateProductValidations';
 function ProductManagement() {
   const [localFile, setLocalFile] = useState('');
   const [productsFromDB, setProductsFromDB] = useState([]);
-  const [parsedFile, setParsedFile] = useState([]);
   const { validatedFile, setValidatedFile } = useContext(Context);
 
   const handleChangeFile = ({ target }) => {
     setLocalFile(target.files[0]);
   };
 
-  const readProductFile = () => {
+  const readAndValidateProductFile = () => {
     Papa.parse(
       localFile,
       {
         header: true,
         skipEmptyLines: true,
         complete: (results) => {
-          setParsedFile(results.data);
           const validations = updateProductValidations(productsFromDB, results.data);
           setValidatedFile(validations);
-          console.log('validatedFile', validatedFile);
         },
       },
     );
   };
+
+  const isButtonDisabled = Array.isArray(validatedFile) && validatedFile
+    .every((prod) => prod.validation === 'Ok');
 
   useEffect(() => {
     const fetchProductsApi = async () => {
@@ -57,13 +57,13 @@ function ProductManagement() {
       <main>
         <div>
           <input type="file" accept=".csv" onChange={ handleChangeFile } />
-          <button type="button" onClick={ readProductFile }>Validar</button>
+          <button type="button" onClick={ readAndValidateProductFile }>Validar</button>
         </div>
-        <button type="submit" disabled>Atualizar</button>
+        <button type="submit" disabled={ !isButtonDisabled }>Atualizar</button>
         {
-          parsedFile.length > 0
-            ? <UpdateProductTable />
-            : <p>Nenhum arquivo carregado...</p>
+          typeof validatedFile === 'string'
+            ? <p>{validatedFile}</p>
+            : <UpdateProductTable />
         }
       </main>
     </div>

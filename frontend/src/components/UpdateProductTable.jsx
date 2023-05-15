@@ -1,4 +1,9 @@
+import { useContext } from 'react';
+import Context from '../context/Context';
+
 function UpdateProductTable() {
+  const { validatedFile } = useContext(Context);
+
   return (
     <table>
       <thead>
@@ -11,13 +16,20 @@ function UpdateProductTable() {
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>16</td>
-          <td>produto Teste</td>
-          <td>20.00</td>
-          <td>22.00</td>
-          <td>Ok</td>
-        </tr>
+        {
+          validatedFile.map((prod) => {
+            const { code, name, currentPrice, newPrice, validation } = prod;
+            return (
+              <tr key={ code }>
+                <td>{ code }</td>
+                <td>{ name }</td>
+                <td>{ currentPrice }</td>
+                <td>{ newPrice }</td>
+                <td>{ validation }</td>
+              </tr>
+            );
+          })
+        }
       </tbody>
     </table>
   );
