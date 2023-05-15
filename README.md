@@ -21,7 +21,7 @@ Ao clicar no botão atualizar, os novos preços dos produtos são enviados para 
 
   Regras de negócio:
   * O código do produto na coluna `product_code` deve ser um produto válido/existente
-  * Novos preços de venda do campo `new_price` não podem ter variação nem maior e nem menor do que 10%
+  * Novos preços de venda do campo `new_price` não podem ser menor que o valor de custo do produto e nem ter variação maior ou menor do que 10%
 
 ## 🔥 Tecnologias utilizadas:
 
