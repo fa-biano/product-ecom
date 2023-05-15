@@ -26,6 +26,7 @@ services:
     command: dev 
     volumes: 
       - ./backend/src:/backend/src
+      - ./frontend/src:/frontend/src
     depends_on:
       db:
         condition: service_healthy

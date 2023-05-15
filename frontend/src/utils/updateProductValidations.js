@@ -55,10 +55,21 @@ const validatePrice = (productsFromDB, updateProducts) => {
 
     const maxRatio = 1.1;
     const minRatio = 0.9;
-    if (priceRatio <= maxRatio && priceRatio >= minRatio) {
+    const isGreaterThanCost = parseFloat(prod.new_price) > currentPrice.costPrice;
+    const isValidPriceRatio = priceRatio <= maxRatio && priceRatio >= minRatio;
+
+    console.log('isGreaterThanCost', isGreaterThanCost);
+
+    if (!isGreaterThanCost) {
+      updateProd.validation = 'Novo preço não pode ser menor que o Custo do Produto';
+      return updateProd;
+    }
+
+    if (isValidPriceRatio) {
       updateProd.validation = 'Ok';
       return updateProd;
     }
+
     updateProd.validation = 'Novo preço não pode ser maior/menor que 10%';
     return updateProd;
   });
