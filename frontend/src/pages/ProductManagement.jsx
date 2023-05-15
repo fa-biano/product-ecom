@@ -52,7 +52,7 @@ function ProductManagement() {
         window.location.reload();
       }
     } catch (err) {
-      console.err(err);
+      console.error(err);
     }
   };
 
@@ -73,7 +73,7 @@ function ProductManagement() {
       }
     };
     fetchProductsApi();
-  });
+  }, []);
 
   return (
     <div className="App">
