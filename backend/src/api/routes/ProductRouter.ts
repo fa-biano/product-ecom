@@ -7,5 +7,6 @@ const productService = new ProductService();
 const productController = new ProductController(productService);
 
 productRouter.get('/', (req: Request, res: Response) => productController.getAll(req, res));
+productRouter.put('/', (req: Request, res: Response) => productController.update(req, res));
 
 export default productRouter;

@@ -1,11 +1,9 @@
-export default interface IProduct {
+export interface IProductUpdate {
   code: number;
-  name: string;
-  costPrice: number;
   salesPrice: number;
 }
-
-export interface IProductUpdate {
-  productId: number;
-  newPrice: number;
+export default interface IProduct extends IProductUpdate {
+  name: string;
+  costPrice: number;
 }
+

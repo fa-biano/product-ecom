@@ -22,8 +22,10 @@ export default class PackService implements IServicePack {
     return packs;
   }
 
-  async updateProductPrice(update: IProductUpdate): Promise<void> {
-    const { productId, newPrice } = update;
-    await this.model.update({ salesPrice: newPrice }, { where: { code: productId } });
+  async updateProductPrice(update: IProductUpdate[]): Promise<void> {
+    update.forEach((prod: IProductUpdate) => this.model.update(
+      { salesPrice: prod.salesPrice },
+      { where: { code: prod.code } },
+    ));
   }
 }
